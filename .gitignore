@@ -1,0 +1,30 @@
+# Archivo de credenciales reales — NUNCA subir a Git
+.env
+
+# Carpeta de logs — puede contener datos sensibles y crece con el tiempo
+logs/
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entorno virtual de Python (si se crea dentro del proyecto)
+venv/
+env/
+.venv/
+
+# Archivos temporales de editores de código
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de distribución de Python
+dist/
+build/
+*.egg-info/
