@@ -45,7 +45,11 @@ EMAIL_SABANETA_PRINCIPAL   = os.getenv("EMAIL_SABANETA_PRINCIPAL", "")
 EMAIL_SABANETA_COPIA       = os.getenv("EMAIL_SABANETA_COPIA", "")
 EMAIL_RIONEGRO_PRINCIPAL   = os.getenv("EMAIL_RIONEGRO_PRINCIPAL", "")
 EMAIL_RIONEGRO_COPIA       = os.getenv("EMAIL_RIONEGRO_COPIA", "")
-EMAIL_COPIA_SIEMPRE        = os.getenv("EMAIL_COPIA_SIEMPRE", "")
+EMAIL_COPIA_SIEMPRE        = [
+    correo.strip()
+    for correo in os.getenv("EMAIL_COPIA_SIEMPRE", "").split(",")
+    if correo.strip()
+]
 INTERVALO_MINUTOS   = int(os.getenv("INTERVALO_MINUTOS", "5"))
 ARCHIVO_PROVEEDORES = "proveedores.json"
 
@@ -1244,13 +1248,13 @@ def determinar_destinatarios(lista_almacen: str) -> dict:
     Retorna dict vacío si el valor recibido no coincide con ninguna de las tres listas.
     """
     if lista_almacen == "almacenSabaneta":
-        return {"principales": [EMAIL_SABANETA_PRINCIPAL], "copia": [EMAIL_SABANETA_COPIA, EMAIL_COPIA_SIEMPRE]}
+        return {"principales": [EMAIL_SABANETA_PRINCIPAL], "copia": [EMAIL_SABANETA_COPIA] + EMAIL_COPIA_SIEMPRE}
     if lista_almacen == "almacenRionegro":
-        return {"principales": [EMAIL_RIONEGRO_PRINCIPAL], "copia": [EMAIL_RIONEGRO_COPIA, EMAIL_COPIA_SIEMPRE]}
+        return {"principales": [EMAIL_RIONEGRO_PRINCIPAL], "copia": [EMAIL_RIONEGRO_COPIA] + EMAIL_COPIA_SIEMPRE}
     if lista_almacen == "almacenRionegroSabaneta":
         return {
             "principales": [EMAIL_SABANETA_PRINCIPAL, EMAIL_RIONEGRO_PRINCIPAL],
-            "copia":       [EMAIL_SABANETA_COPIA,     EMAIL_RIONEGRO_COPIA, EMAIL_COPIA_SIEMPRE],
+            "copia":       [EMAIL_SABANETA_COPIA, EMAIL_RIONEGRO_COPIA] + EMAIL_COPIA_SIEMPRE,
         }
     return {}
 
