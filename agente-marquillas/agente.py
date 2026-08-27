@@ -2136,8 +2136,8 @@ def buscar_proveedor_en_lista(nit_proveedor: str, proveedores: dict) -> tuple:
     """
     for lista_nombre in ["almacenSabaneta", "almacenRionegro", "almacenRionegroSabaneta"]:
         for entrada in proveedores.get(lista_nombre, []):
-            if entrada.get("nit_proveedor") == nit_proveedor:
-                return entrada.get("nombre_proveedor"), lista_nombre
+            if entrada.get("nit") == nit_proveedor:
+                return entrada.get("nombre"), lista_nombre
     return None, None
 
 

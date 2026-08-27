@@ -1,6 +1,9 @@
 # Archivo de credenciales reales — NUNCA subir a Git
 .env
 
+# Listado de proveedores — datos internos que cambian localmente por almacén
+proveedores.json
+
 # Carpeta de logs — puede contener datos sensibles y crece con el tiempo
 logs/
 
