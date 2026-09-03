@@ -1909,6 +1909,8 @@ def procesar_un_correo(token: str, correo: dict, instrucciones: str, facturas_ap
 
             # Verificar proveedor desde el asunto antes de descargar ZIP o llamar a Claude
             nit_del_asunto = extraer_nit_del_asunto(asunto)
+            print(f"[DIAG ASUNTO] {repr(asunto)}")
+            print(f"[DIAG NIT] {repr(nit_del_asunto)}")
             print(f"{nit_del_asunto} NIT extraído del asunto para verificación previa")
             if nit_del_asunto:
                 proveedores = cargar_proveedores()
