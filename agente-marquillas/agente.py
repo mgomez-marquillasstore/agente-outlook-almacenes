@@ -1977,7 +1977,11 @@ def procesar_un_correo(token: str, correo: dict, instrucciones: str, facturas_ap
                 return  # No marcar como leído — factura rechazada por Claude
 
             # ── Fase 3: buscar el proveedor y determinar destinatarios ──
-            nit_limpio                      = limpiar_nit(resultado.get("nit_emisor", ""))
+            # Preferir el NIT del asunto — ya fue validado contra proveedores.json antes de
+            # llamar a OpenAI (líneas arriba). Solo se usa el NIT leído por OpenAI del PDF
+            # como respaldo cuando el asunto no traía uno (evita que un error de lectura
+            # de OpenAI arruine el enrutamiento si ya teníamos un NIT confiable).
+            nit_limpio                      = nit_del_asunto or limpiar_nit(resultado.get("nit_emisor", ""))
             proveedores                     = cargar_proveedores()
             nombre_proveedor, lista_almacen = buscar_proveedor_en_lista(nit_limpio, proveedores)
 
